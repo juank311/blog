@@ -1,5 +1,19 @@
 <?php include("../includes/header.php") ?>
 
+<?php
+
+    //primero es instanciar la conexion con la base de datos 
+    $dataBase = new classConnection_mysql;
+    $db = $dataBase->connection();
+
+    //segundo es instacial el objeto que mostrará los resultados
+
+    $table_result = new classArticle($db);
+    $articles = $table_result->search();
+    var_dump($articles);
+
+?>
+
 
 <div class="row">
     <div class="col-sm-6">
@@ -23,20 +37,20 @@
                     </tr>
                 </thead>
                 <tbody>
-             
+                <?php foreach($articles as $row) :?>
                     <tr>
-                        <td>1</td>
-                        <td>test</td>
+                        <td><?php echo $row->id; ?></td>
+                        <td><?php echo $row->title; ?></td>
                         <td>
-                            <img class="img/articulos/" style="width:180px;">
+                            <img class="img-" src="<?php echo RUTA_USER;?>img/articulos/<?php echo $row->picture?>" style="width:130px;">
                         </td>
-                        <td>test</td>
-                        <td>test</td>                      
+                        <td><?php echo $row->text; ?></td>
+                        <td><?php echo $row->creation_date; ?></td>                      
                         <td>
-                        <a href="editar_articulo.php" class="btn btn-warning"><i class="bi bi-pencil-fill"></i></a>                       
+                        <a href="editar_articulo.php?id=<?php echo $row->id?>" class="btn btn-warning"><i class="bi bi-pencil-fill"></i></a>                       
                         </td>
                     </tr>
-               
+                <?php endforeach; ?>
                 </tbody>       
             </table>
     </div>
