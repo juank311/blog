@@ -35,6 +35,23 @@ class classArticle
             return $result;          
         }
 
+        public function insert()
+        {
+            $query_insert = 'INSERT INTO '.$this->table.' (title, picture, text) VALUES (?, ?, ?) ';
+            $stmt_insert = $this->conn->prepare($query_insert);
+
+            $this->title = htmlspecialchars(strip_tags($this->title));
+            $this->text = htmlspecialchars(strip_tags($this->text));
+
+            $stmt_insert->execute([$this->title, $this->picture, $this->text]);
+
+            if ($stmt_insert) {
+                return true;
+            }else{
+                return false;
+            }
+            
+        }
 
 
 
