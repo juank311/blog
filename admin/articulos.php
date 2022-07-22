@@ -10,7 +10,7 @@
 
     $table_result = new classArticle($db);
     $articles = $table_result->search();
-    var_dump($articles);
+    //var_dump($articles);
 
 ?>
 
@@ -47,7 +47,8 @@
                         <td><?php echo $row->text; ?></td>
                         <td><?php echo $row->creation_date; ?></td>                      
                         <td>
-                        <a href="editar_articulo.php?id=<?php echo $row->id?>" class="btn btn-warning"><i class="bi bi-pencil-fill"></i></a>                       
+                        <a href="editar_articulo.php?id=<?php echo $row->id?>" class="btn btn-warning">Editar <i class="bi bi-pencil-fill"></i></a> 
+                        <a href="borrar_articulo.php?id=<?php echo $row->id?>" class="btn btn-danger">Borrar<i class="bi bi-person-bounding-box"></i></button>                      
                         </td>
                     </tr>
                 <?php endforeach; ?>

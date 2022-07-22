@@ -9,10 +9,11 @@ $db = $dataBase->connection();
 
 if (isset($_POST['crearArticulo'])) 
 {
-    //Recogemos el archivo enviado por el formulario
+   /*  //Recogemos el archivo enviado por el formulario
    $picture = $_FILES['picture']['name'];
    //Si el picture contiene algo y es diferente de vacio
-   if (isset($picture) && $picture != "") {
+   if (isset($picture) && $picture != "") 
+   {
       //Obtenemos algunos datos necesarios sobre el picture
       $tipo = $_FILES['picture']['type'];
       $tamano = $_FILES['picture']['size'];
@@ -31,26 +32,27 @@ if (isset($_POST['crearArticulo']))
             //Mostramos el mensaje de que se ha subido co éxito
            /*  echo '<div><b>Se ha subido correctamente la imagen.</b></div>';
             //Mostramos la imagen subida
-            echo '<p><img src="images/'.$picture.'"></p>'; */
+            echo '<p><img src="images/'.$picture.'"></p>'; 
         }
         else {
            //Si no se ha podido subir la imagen, mostramos un mensaje de error
            echo '<div><b>Ocurrió algún error al subir el fichero. No pudo guardarse.</b></div>';
         }
       }
-   }  
+   }  */ 
     
     $result = new classArticle($db);
 
     $result->title = $_POST['title'];
-    $result->picture =  $picture;
     $result->text = $_POST['text'];
+    $pisture = $_FILES['picture']['name'];
 
-    $insert = $result->insert();
+    $insert = $result->insert($picture);
 
-    if ($insert == true) {
+    if ($insert == true) 
+    {
         echo 'Ingresado correctamente';
-    }else {
+    } else {
         echo 'no SE PUDO INGRESAR';
     }
     
