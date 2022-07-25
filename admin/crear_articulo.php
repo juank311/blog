@@ -45,7 +45,7 @@ if (isset($_POST['crearArticulo']))
 
     $result->title = $_POST['title'];
     $result->text = $_POST['text'];
-    $pisture = $_FILES['picture']['name'];
+    $picture = $_FILES['picture']['name'];
 
     $insert = $result->insert($picture);
 

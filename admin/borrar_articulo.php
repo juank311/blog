@@ -13,7 +13,8 @@
 
  //traer funcion para borrar 
 if (isset($_POST['borrarArticulo'])) 
-{
+{   
+   
     $delete = $classArticle->delete();
     if ($delete) {
         echo "borrado exitosamente";
