@@ -9,6 +9,8 @@ $classArticle = new classArticle($db);
     $id = $classArticle->id = $_GET['id'];
     $article = $classArticle->search_one($id);
 
+//Se llama la clase de busqueda global, para analizar si existe la imagen antigua 
+
     //traer funcion para actualizar
 if (isset($_POST['editarArticulo']))
 {   
@@ -18,12 +20,10 @@ if (isset($_POST['editarArticulo']))
     
     echo $picture;
     
-    if ($classArticle->update($id, $title, $text, $picture)) 
+    if ($classArticle->update($id, $title, $text, $picture, $picture_old)) 
     {
+        header('location:'.RUTA_ADMIN.'articulos.php');
         
-        //header('location:'.RUTA_ADMIN.'articulos.php');
-        echo "actualizado correctamente";
-
     } else {
         echo "No actualizado";
     }
@@ -45,7 +45,7 @@ if (isset($_POST['editarArticulo']))
     <div class="col-sm-6 offset-3">
         <form method="POST" action="" enctype="multipart/form-data">
 
-            <input type="hidden" name="id" value="4">
+            <input type="hidden" name="id" value="4"> <!-- Sirve para enviar datos por el metodo POST -->
 
             <div class="mb-3">
                 <label for="titulo" class="form-label">Título:</label>

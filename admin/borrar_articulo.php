@@ -8,16 +8,16 @@
  //segundo es instacial el objeto que mostrará los resultados
 
  $classArticle = new classArticle($db);
- $classArticle->id = $_GET['id'];
- $article = $classArticle->search_one();
+ $id = $_GET['id'];
+ $article = $classArticle->search_one($id);
 
  //traer funcion para borrar 
 if (isset($_POST['borrarArticulo'])) 
 {   
    
-    $delete = $classArticle->delete();
+    $delete = $classArticle->delete($id);
     if ($delete) {
-        echo "borrado exitosamente";
+        header('location:'.RUTA_ADMIN.'articulos.php');
     }else {
         echo "no se pudo borrar exitosamente";
     }
@@ -38,7 +38,7 @@ if (isset($_POST['borrarArticulo']))
         <div class="col-sm-6 offset-3">
         <form method="POST" action="" enctype="multipart/form-data">
 
-            <input type="hidden" name="id" value="4">
+            <input type="hidden" name="id" value="4"><!-- Sirve para enviar datos por el metodo POST -->
 
             <div class="mb-3">
                 <label for="titulo" class="form-label">Título:</label>

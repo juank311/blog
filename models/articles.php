@@ -106,7 +106,7 @@ class classArticle
     }
 
     //Insertar articulo con validacion e insercion de imagen
-    public function update($id, $title, $text, $picture)
+    public function update($id, $title, $text, $picture, $picture_old)
     {
         if ($picture == "" || !isset($picture) || empty($picture) || $picture == null) 
         {   echo "entro por aqui";
@@ -134,7 +134,7 @@ class classArticle
                 //$picture = $_FILES['picture']['name'];
                 //Si el picture contiene algo y es diferente de vacio
                 if (isset($picture) && $picture != "") 
-                {   echo "nuevo";
+                {   
                     //Obtenemos algunos datos necesarios sobre el picture
                     $tipo = $_FILES['picture']['type'];
                     $tamano = $_FILES['picture']['size'];
@@ -188,7 +188,7 @@ class classArticle
     }
 
     //Leer aticulos uno solo 
-    public function delete()
+    public function delete($id)
     {
 
         //se define la query.
@@ -196,9 +196,9 @@ class classArticle
         //se prepara la consulta en este caso será de forma OBJ por lo tanto usaremos query.
         $stmt_delete = $this->conn->prepare($query_delete);
 
-        $this->id = htmlspecialchars(strip_tags($this->id));
+        $this->id = htmlspecialchars(strip_tags($id));
 
-        $stmt_delete->bindParam(1, $this->id, PDO::PARAM_INT);
+        $stmt_delete->bindParam(1, $id, PDO::PARAM_INT);
         $stmt_delete->execute();
         $delete_correct = $stmt_delete;
         if ($delete_correct) {

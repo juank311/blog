@@ -13,7 +13,7 @@
         <div class="col-sm-6 offset-3">
         <form method="POST" action=""> 
 
-            <input type="hidden" name="id" value="4">
+            <input type="hidden" name="id" value="4"> <!-- Sirve para enviar datos por el metodo POST -->
 
             <div class="mb-3">
                 <label for="texto">Texto</label>   

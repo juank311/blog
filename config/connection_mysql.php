@@ -20,7 +20,7 @@ class classConnection_mysql
         
         //Mostrar mensaje si la conexión es correcta
         if($this->conn){
-        //echo "Conectado a la base  correctamente!"; 
+        echo "Conectado a la base  correctamente!"; 
         //echo "\n";
         }
         }catch (PDOException $e){
