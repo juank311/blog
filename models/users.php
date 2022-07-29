@@ -15,6 +15,7 @@ class classUsers
     public $creation_date;
     public $error;
     public $mensaje;
+    public $email_exist;
 
 
     //se define el constructor que se ejecuta siempre sin importar nada, el cual establecerá la conexion con la base de datos.
@@ -38,6 +39,27 @@ class classUsers
         $stmt_search->execute();
         $result = $stmt_search->fetchAll(PDO::FETCH_OBJ);
         return $result;
+    }
+
+    public function search_email($email_exist)
+    {
+
+        //se define la query.
+        $stmt_search = 'SELECT u.id AS id_user, u.name AS name_user, u.email AS email_user, u.rol_id AS id_roll_user, u.creation_date AS creation_date_user, r.name AS rol_name
+        FROM ' . $this->table. ' u INNER JOIN roles r ON r.id = u.rol_id WHERE u.email = :email_exist';
+        //se prepara la consulta en este caso será de forma OBJ por lo tanto usaremos query.
+        $stmt_search = $this->conn->prepare($stmt_search);
+        $email_exist = htmlspecialchars(strip_tags($email_exist));
+        $stmt_search->bindParam(':email_exist', $email_exist, PDO::PARAM_STR);
+        $stmt_search->execute();
+        $result = $stmt_search->fetchAll(PDO::FETCH_ASSOC);
+        if ($result) {
+            $this->email_exist = true;
+            $this->error = "El correo ya existe";
+        }else {
+            $this->email_exist = false;
+        }
+        
     }
 
     //Leer aticulos uno solo 

@@ -9,23 +9,27 @@ $db = $dataBase->connection();
 //segundo es instacial el objeto que mostrará los insertados
 
 if (isset($_POST['registrarse'])) 
-{   
-    $name = $_POST['name'];
+{   $classUsers = new classUsers($db);
     $email = $_POST['email'];
+    $classUsers->search_email($email);
+    $name = $_POST['name'];
     $password = md5($_POST['password']);
     $confirm_password = md5($_POST['confirm_password']);
     $rol_id = $_POST["rol_id"];
+    
+    if ($classUsers->email_exist == false) 
+    {   
+        $insert = $classUsers->insert($name, $email, $password, $confirm_password, $rol_id);
 
-    $classUsers = new classUsers($db);
-    $insert = $classUsers->insert($name, $email, $password, $confirm_password, $rol_id);
-
-    if ($insert == true) 
-    {
-        $mensaje =  'Usuario creado correctamente';
-    } else {
-        $error = "No se pudo crear el usuario";
+        if ($insert == true) 
+        {
+            $mensaje =  'Usuario creado correctamente';
+        } else {
+            $error = "No se pudo crear el usuario";
+        }
     }
 }
+
 
 ?>
 
