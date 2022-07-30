@@ -1,14 +1,6 @@
-<?php
-include('config/config.php');
-include('config/connection_mysql.php');
-include('helpers/helper_format.php');
-include('models/articles.php');
-include('models/comments.php');
-include('models/users.php');
-?>
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
-
+<!-- Separa header en una sola cabecera-->
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
@@ -27,10 +19,10 @@ include('models/users.php');
 </head>
 
 <body>
-
+<!-- El nav en otra-->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-      <a class="navbar-brand" href="<?php echo RUTA_USER; ?>index.php">Blog PHP 8</a>
+      <a class="navbar-brand" href="index.php">Blog PHP 8</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -44,30 +36,30 @@ include('models/users.php');
 
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li>
-                <a class="dropdown-item" href="<?php echo RUTA_ADMIN; ?>articulos.php">Artículos</a>
+                <a class="dropdown-item" href="articulos.php">Artículos</a>
               </li>
               <li>
-                <a class="dropdown-item" href="<?php echo RUTA_ADMIN; ?>comentarios.php">Comentarios</a>
+                <a class="dropdown-item" href="comentarios.php">Comentarios</a>
               </li>
               <li>
-                <a class="dropdown-item" href="<?php echo RUTA_ADMIN; ?>usuarios.php">Usuarios</a>
+                <a class="dropdown-item" href="usuarios.php">Usuarios</a>
               </li>
             </ul>
 
           </li>
 
-      </ul>
+        </ul>
 
         <ul class="navbar-nav mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link" href="<?php echo RUTA_USER; ?>index.php">Inicio</a>
+            <a class="nav-link" href="index.php">Inicio</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="<?php echo RUTA_USER; ?>registro.php">Registrarse</a>
+            <a class="nav-link" href="registro.php">Registrarse</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<?php echo RUTA_USER; ?>acceder.php">Acceder</a>
+            <a class="nav-link" href="acceder.php">Acceder</a>
           </li>
 
 
@@ -76,7 +68,7 @@ include('models/users.php');
             <p class="text-white mt-2"><i class="bi bi-person-circle"></i> </p>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<?php echo RUTA_USER; ?>salir.php">Salir</a>
+            <a class="nav-link" href="salir.php">Salir</a>
           </li>
 
         </ul>

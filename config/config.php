@@ -10,5 +10,7 @@ define('RUTA_USER', 'http://localhost/blog/');
 
 define('RUTA_INCLUDES', 'http://localhost/blog/includes/');
 
+define('RUTA_INDEX', 'index.php');
+
 
 ?>
