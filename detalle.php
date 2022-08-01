@@ -1,4 +1,5 @@
-<?php include("includes/header_front.php") ?>
+<?php session_start();
+include("admin/includes_lvl_1.php") ?>
 
     <div class="row">
        

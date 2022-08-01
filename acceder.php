@@ -1,4 +1,40 @@
-<?php include("includes/header_front.php") ?>
+<?php session_start();
+      include('config/config.php');
+      include('includes/header.php');
+      include('includes/nav.php');
+      include('config/connection_mysql.php');
+      include('helpers/helper_format.php');
+      include('models/users.php');
+
+
+$dataBase = new classConnection_mysql;
+$db = $dataBase->connection();
+$classUsers = new classUsers($db);
+
+if (isset($_POST['acceder'])) {
+    $email = $_POST['email'];
+    $password = md5($_POST['password']);
+    $classUsers->login($email, $password);
+
+    if (isset($classUsers->mensaje)) { 
+        
+        $_SESSION['activo'] = true;
+        header('Location: index.php');
+    } else {
+        $_SESSION['activo'] = false;
+    }
+}
+
+
+?>
+
+<!-- error Alt+Shift+F -->
+<?php if (isset($classUsers->error)) : ?>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong><?php echo $classUsers->error; ?></strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<?php endif ?>
 
     <div class="container-fluid">
         <h1 class="text-center">Acceso de Usuarios</h1>
@@ -6,7 +42,7 @@
             <div class="col-sm-6 offset-3">
                 <div class="card">
                    <div class="card-header">
-                        Ingresa tus datos para acceder
+                        Ingresa tus datos para acceder, si no tienes cuenta<a href="/blog/registro.php">    registrate aquí</a>
                    </div>
                     <div class="card-body">
                     <form method="POST" action="">
@@ -33,4 +69,3 @@
          
     </div>
 <?php include("includes/footer.php") ?>
-       

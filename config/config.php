@@ -10,7 +10,4 @@ define('RUTA_USER', 'http://localhost/blog/');
 
 define('RUTA_INCLUDES', 'http://localhost/blog/includes/');
 
-echo RUTA_USER;
-
-
 ?>

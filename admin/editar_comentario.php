@@ -1,5 +1,6 @@
-<?php include("../includes/header.php") ?>
-<?PHP
+<?php include('includes_lvl_2.php');
+      include('../models/comments.php');
+      
 //primero es instanciar la conexion con la base de datos 
 $dataBase = new classConnection_mysql;
     $db = $dataBase->connection();
@@ -46,13 +47,13 @@ if (isset($_POST['borrarComentario']))
           
     </div>
 
-<div class="row">
+    <div class="row">
+        <div class="col-sm-6 offset-3">
+        <div class="row">
         <div class="col-sm-6">
             <h3>Editar Comentario</h3>
         </div>            
     </div>
-    <div class="row">
-        <div class="col-sm-6 offset-3">
         <form method="POST" action=""> 
 
             <input type="hidden" name="id" value="4"> <!-- Sirve para enviar datos por el metodo POST -->

@@ -16,6 +16,7 @@ class classUsers
     public $error;
     public $mensaje;
     public $email_exist;
+    public $SESSION;
 
 
     //se define el constructor que se ejecuta siempre sin importar nada, el cual establecerá la conexion con la base de datos.
@@ -157,4 +158,32 @@ class classUsers
             return false;
         }
     }
+    
+    public function login($email, $password)
+    {
+        if (!empty($_POST['email']) && $_POST['email'] != "" && !empty($_POST['password']) && $_POST['password'] != "") 
+        {
+            //ejecucion de la consulta 
+            $query_search_email = 'SELECT * FROM '.$this->table.' WHERE email = :email';
+            $stmt_search_email = $this->conn->prepare($query_search_email);
+            $stmt_search_email->bindParam(':email', $email, PDO::PARAM_STR);
+            $stmt_search_email->execute();
+            $email_verification = $stmt_search_email->fetch(PDO::FETCH_OBJ);
+            //$this->datas = $email_verification;
+                if ($email_verification) 
+                {
+                    if ($password == $email_verification->password)
+                    {   $this->datas = $_SESSION['data_employee']=$email_verification;
+                        return $this->mensaje = true;
+                        //header('Location: acceder.php');
+                    } else{
+                    $this->error = "La Contraseña es incorrecta";
+                    }
+                } else {
+                $this->error = "El correo es invalido";
+                }
+        } else {
+            $this->error = "Existen campos vacios"; }
+    }
+
 }

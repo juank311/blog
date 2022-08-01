@@ -1,4 +1,5 @@
-<?php include("../includes/header.php");
+<?php include('includes_lvl_2.php');
+include('../models/articles.php');
 
 //primero es instanciar la conexion con la base de datos 
 $dataBase = new classConnection_mysql;
@@ -31,18 +32,19 @@ if (isset($_POST['editarArticulo']))
 }
 
 ?>
-
+<div class="container mt-5">
 <div class="row">
 
 </div>
 
 <div class="row">
+    
+    <div class="col-sm-6 offset-3">
+    <div class="row">
     <div class="col-sm-6">
         <h3>Editar Artículo</h3>
     </div>
 </div>
-<div class="row">
-    <div class="col-sm-6 offset-3">
         <form method="POST" action="" enctype="multipart/form-data">
 
             <input type="hidden" name="id" value="4"> <!-- Sirve para enviar datos por el metodo POST -->
