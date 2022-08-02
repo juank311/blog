@@ -30,11 +30,11 @@
           <li class="nav-item">
             <a class="nav-link" href="<?php echo RUTA_USER; ?>index.php">Inicio</a>
           </li>
-
+          <?php if (empty($_SESSION['activo'])) : ?>
           <li class="nav-item">
             <a class="nav-link" href="<?php echo RUTA_USER; ?>registro.php">Registrarse</a>
           </li>
-          <?php if (empty($_SESSION['activo'])) : ?>
+          
           <li class="nav-item">
             <a class="nav-link" href="<?php echo RUTA_USER; ?>acceder.php">Acceder</a>
           </li>
