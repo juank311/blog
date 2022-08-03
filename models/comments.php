@@ -74,15 +74,23 @@ class classComments
     }
 
     //Insertar articulo con validacion e insercion de imagen
-    public function insert($id, $id_comment)
+    public function insert($comments, $user_id, $article_id, $status)
     {
-        $query_insert = 'INSERT INTO ' . $this->table . ' (status) VALUES (?) ';
+        $query_insert = 'INSERT INTO ' . $this->table . ' (comments, user_id, article_id, status) VALUES (:comments, :user_id, :article_id, :status) ';
         $stmt_insert = $this->conn->prepare($query_insert);
          //validacion de datos
         
-        $rol_id = htmlspecialchars(strip_tags($rol_id));
+        $comments = htmlspecialchars(strip_tags($comments));
+        $user_id = htmlspecialchars(strip_tags($user_id));
+        $article_id = htmlspecialchars(strip_tags($article_id));
+        $status = htmlspecialchars(strip_tags($status));
+        
+        $stmt_insert->bindParam(':comments', $comments, PDO::PARAM_STR);
+        $stmt_insert->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+        $stmt_insert->bindParam(':article_id', $article_id, PDO::PARAM_INT);
+        $stmt_insert->bindParam(':status', $status, PDO::PARAM_INT);
 
-        $stmt_insert->execute([$name, $email, $password, $rol_id]);
+        $stmt_insert->execute();
 
             if ($stmt_insert) {
                 return true;

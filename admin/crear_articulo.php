@@ -50,7 +50,8 @@ if (isset($_POST['crearArticulo'])) {
     $insert = $result->insert($picture);
 
     if ($insert == true) {
-        echo 'Ingresado correctamente';
+        $mensaje = "Articulo creado con exito";
+        header('Location: articulos.php?mensaje='.urlencode($mensaje));
     } else {
         echo 'no SE PUDO INGRESAR';
     }

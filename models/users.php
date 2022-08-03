@@ -173,7 +173,7 @@ class classUsers
                 if ($email_verification) 
                 {
                     if ($password == $email_verification->password)
-                    {   $this->datas = $_SESSION['data_employee']=$email_verification;
+                    {   $_SESSION['data_employee']=$email_verification;
                         return $this->mensaje = true;
                         //header('Location: acceder.php');
                     } else{

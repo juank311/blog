@@ -26,10 +26,25 @@ $articles = $table_result->search();
         </div>
         <div class="col-sm-4 offset-2">
             <a href="crear_articulo.php" class="btn btn-success w-100"><i class="bi bi-plus-circle-fill"></i> Nuevo Artículo</a>
+        
         </div>
     </div>
     <div class="row mt-2 caja">
         <div class="col-sm-12">
+        <?php if (isset($_GET['mensaje'])) : ?>
+                    <!-- mensaje --> 
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong><?= $_GET['mensaje']?></strong> 
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    <?php endif ?>
+                    <!-- error --> 
+                    <?php if (isset($classUsers->error)) : ?>
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong><?php echo $classUsers->error; ?></strong> 
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    <?php endif ?>
             <table id="tblArticulos" class="display" style="width:100%">
                 <thead>
                     <tr>
