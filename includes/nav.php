@@ -5,8 +5,9 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <?php if (isset($_SESSION['activo']) && $_SESSION['data_employee']->rol_id == 2) : ?>
+       
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <?php if (isset($_SESSION['activo']) && $_SESSION['data_employee']->rol_id == 2) : ?>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Administración
@@ -23,8 +24,9 @@
                 </li>
               </ul>
             </li>
+            <?php endif; ?>
           </ul>
-        <?php endif; ?>
+        
 
         <ul class="navbar-nav mb-2 mb-lg-0">
           <li class="nav-item">
@@ -41,7 +43,7 @@
           <?php endif; ?>
           <?php if (!empty($_SESSION['activo'])) : ?>
             <li class="nav-item">
-              <p class="text-white mt-2"><i class="bi bi-person-circle"></i> </p>
+              <p class="text-white mt-2"><i class="bi bi-person-circle"></i> <?= $_SESSION['data_employee']->email; ?></p>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="<?php echo RUTA_USER; ?>salir.php">Salir</a>
