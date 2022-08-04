@@ -16,10 +16,9 @@ var_dump($user);
 if (isset($_POST['editarUsuario'])) {
     $name = $_POST['name'];
     $email = $_POST['email'];
-    $password = md5($_POST['password']);
     $rol_id = ($_POST['rol']);
 
-    if ($classUsers->update($name, $email, $password, $rol_id, $id)) {
+    if ($classUsers->update($name, $email, $rol_id, $id)) {
 
         header("Refresh:2");
         header("Location: " . RUTA_ADMIN . "usuarios.php");

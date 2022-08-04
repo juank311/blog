@@ -24,7 +24,7 @@ if (isset($_POST['enviarComentario'])) {
         $error = "No ha escrito ningun comentario";
         echo $error;
     } else {
-        
+
         $insert = $classComments->insert($comments, $user_id, $article_id, $status);
         if ($insert == true) {
             $mensaje = "Comentario añadido exitosamente, espere que un administrador lo apruebe.";
@@ -33,6 +33,14 @@ if (isset($_POST['enviarComentario'])) {
         }
     }
 }
+
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
+    $comments = $classComments->search_id_article($id);
+    var_dump($comments);
+}
+
+
 ?>
 
 
@@ -80,10 +88,10 @@ if (isset($_POST['enviarComentario'])) {
         </div>
     </div>
 
-
+    <br />
     <div class="row">
 
-        <div class="col-sm-6 offset-3">
+        <div class="col-sm-6 offset-12">
             <form method="POST" action="">
                 <input type="hidden" name="articulo" value="">
                 <div class="mb-3">
@@ -93,7 +101,7 @@ if (isset($_POST['enviarComentario'])) {
 
                 <div class="mb-3">
                     <label for="comentario">Comentario</label>
-                    <textarea class="form-control" name="comments" style="height: 200px"></textarea>
+                    <textarea class="form-control" name="comments" style="height: 100px"></textarea>
                 </div>
 
                 <br />
@@ -106,10 +114,11 @@ if (isset($_POST['enviarComentario'])) {
 
 <div class="row">
     <h3 class="text-center mt-5">Comentarios</h3>
-
-    <h4><i class="bi bi-person-circle"></i> juangarcia@gmail.com</h4>
-    <p>texto comentario demo</p>
-
+    <?php foreach ($comments as $row) : ?>
+        <span><?= $row->date_comments ?></span>
+        <h6><i class="bi bi-person-circle"></i><?= $row->name_user ?></h6>
+        <p><?= $row->name_comments ?></p>
+    <?php endforeach; ?>
 </div>
 
 </div>

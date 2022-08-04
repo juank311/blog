@@ -29,7 +29,7 @@ class classComments
         u.id AS id_user, u.email AS name_user, 
         a.id AS id_article, a.title AS title_article,
         s.name_status AS name_status
-        FROM '.$this->table.' c 
+        FROM ' . $this->table . ' c 
         LEFT JOIN articles a 
         ON c.article_id = a.id
         LEFT JOIN users u 
@@ -52,7 +52,7 @@ class classComments
         u.id AS id_user, u.email AS name_user, 
         a.id AS id_article, a.title AS title_article,
         s.name_status AS name_status
-        FROM '.$this->table.' c 
+        FROM ' . $this->table . ' c 
         LEFT JOIN articles a 
         ON c.article_id = a.id
         LEFT JOIN users u 
@@ -67,9 +67,33 @@ class classComments
 
         $id = htmlspecialchars(strip_tags($id));
 
-       // $stmt_search->bindParam(1, $id, PDO::PARAM_INT);
+        // $stmt_search->bindParam(1, $id, PDO::PARAM_INT);
         $stmt_search->execute([$id]);
         $result = $stmt_search->fetch(PDO::FETCH_OBJ);
+        return $result;
+    }
+
+    //Leer aticulos uno solo 
+    public function search_id_article($id_article)
+    {
+        //se define la query.
+        $query_search = 'SELECT 
+        c.id AS id_comments, c.comments AS name_comments, c.creation_date AS date_comments, c.user_id AS user_id, c.status AS status_id, 
+        u.email AS name_user  
+        FROM ' . $this->table . ' c 
+        INNER JOIN users u
+        ON  u.id = c.user_id
+        WHERE c.article_id = ? 
+        && c.status = 1';
+
+        //se prepara la consulta en este caso será de forma OBJ por lo tanto usaremos query.
+        $stmt_search = $this->conn->prepare($query_search);
+
+        $id_article = htmlspecialchars(strip_tags($id_article));
+
+        // $stmt_search->bindParam(1, $id, PDO::PARAM_INT);
+        $stmt_search->execute([$id_article]);
+        $result = $stmt_search->fetchAll(PDO::FETCH_OBJ);
         return $result;
     }
 
@@ -78,13 +102,13 @@ class classComments
     {
         $query_insert = 'INSERT INTO ' . $this->table . ' (comments, user_id, article_id, status) VALUES (:comments, :user_id, :article_id, :status) ';
         $stmt_insert = $this->conn->prepare($query_insert);
-         //validacion de datos
-        
+        //validacion de datos
+
         $comments = htmlspecialchars(strip_tags($comments));
         $user_id = htmlspecialchars(strip_tags($user_id));
         $article_id = htmlspecialchars(strip_tags($article_id));
         $status = htmlspecialchars(strip_tags($status));
-        
+
         $stmt_insert->bindParam(':comments', $comments, PDO::PARAM_STR);
         $stmt_insert->bindParam(':user_id', $user_id, PDO::PARAM_INT);
         $stmt_insert->bindParam(':article_id', $article_id, PDO::PARAM_INT);
@@ -92,40 +116,38 @@ class classComments
 
         $stmt_insert->execute();
 
-            if ($stmt_insert) {
-                return true;
-            } else {
-                return false;
-            }
+        if ($stmt_insert) {
+            return true;
+        } else {
+            return false;
+        }
     }
-    
+
 
     //Insertar articulo con validacion e insercion de imagen
     public function update($id, $id_comment)
     {
-            $query_update = 'UPDATE ' . $this->table . ' SET status = :status WHERE id = :id';
-            $stmt_update = $this->conn->prepare($query_update);
-            //validacion de datos
-          
-            $stmt_update->bindParam(':id', $id, PDO::PARAM_INT);
-            $stmt_update->bindParam(':status', $id_comment, PDO::PARAM_INT);
-          
+        $query_update = 'UPDATE ' . $this->table . ' SET status = :status WHERE id = :id';
+        $stmt_update = $this->conn->prepare($query_update);
+        //validacion de datos
 
-            $update = $stmt_update->execute();
+        $stmt_update->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt_update->bindParam(':status', $id_comment, PDO::PARAM_INT);
 
-            if ($update) 
-            {
-                $texto = "Usuario actualizado correctamente";
-                $this->mensaje = $texto;
-                $this->mensaje;
-                return $update = true;
-            } else {
-                $this->error = "Usuario no se pudo actualizar";
-                
-            }   
+
+        $update = $stmt_update->execute();
+
+        if ($update) {
+            $texto = "Usuario actualizado correctamente";
+            $this->mensaje = $texto;
+            $this->mensaje;
+            return $update = true;
+        } else {
+            $this->error = "Usuario no se pudo actualizar";
         }
-                        
-                           
+    }
+
+
     //Leer aticulos uno solo 
     public function delete($id)
     {
@@ -145,5 +167,4 @@ class classComments
             return false;
         }
     }
-
 }

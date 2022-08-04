@@ -20,8 +20,8 @@ $classArticles = new classArticle($db);
                 <img src="<?= RUTA_USER?>img/articulos/<?= $row->picture?>" class="card-img-top">
                 <div class="card-body">
                     <h5 class="card-title"><?= $row->title ?></h5>
-                    <p><strong><?= $row->creation_date ?></strong></p>
-                    <p class="card-text"><?= $row->text ?></p>
+                    <p><strong><?= formatear_fecha($row->creation_date) ?></strong></p>
+                    <p class="card-text"><?= texto_corto($row->text) ?></p>
                     <a href="detalle.php?id=<?= $row->id ?>" class="btn btn-primary">Ver más</a>
                 </div>
             </div>

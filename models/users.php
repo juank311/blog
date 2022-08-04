@@ -107,20 +107,19 @@ class classUsers
     }
 
     //Insertar articulo con validacion e insercion de imagen
-    public function update($name, $email, $password, $rol_id, $id)
+    public function update($name, $email, $rol_id, $id)
     {
-        if  (empty($name) || empty($email) || empty($password) || empty($rol_id)) 
+        if  (empty($name) || empty($email) || empty($rol_id)) 
         {   
             return $this->error = "Datos vacios";
 
         }else {
-            $query_update = 'UPDATE ' . $this->table . ' SET name = :name, email = :email, password = :password, rol_id = :rol_id WHERE id = :id';
+            $query_update = 'UPDATE ' . $this->table . ' SET name = :name, email = :email, rol_id = :rol_id WHERE id = :id';
             $stmt_update = $this->conn->prepare($query_update);
             //validacion de datos
           
             $stmt_update->bindParam(':id', $id);
             $stmt_update->bindParam(':name', $name, PDO::PARAM_STR);
-            $stmt_update->bindParam(':password', $password);
             $stmt_update->bindParam(':email', $email);
             $stmt_update->bindParam(':rol_id', $rol_id);
 
@@ -173,7 +172,7 @@ class classUsers
                 if ($email_verification) 
                 {
                     if ($password == $email_verification->password)
-                    {   $_SESSION['data_employee']=$email_verification;
+                    {   $_SESSION['data_employee'] = $email_verification;
                         return $this->mensaje = true;
                         //header('Location: acceder.php');
                     } else{

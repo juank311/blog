@@ -4,7 +4,7 @@ if (!isset($_SESSION)) {
     
 }
 
-if (!isset($_SESSION['activo'])) {
+if (!isset($_SESSION['activo']) ||  $_SESSION['data_employee']->rol_id == 1) {
     header('Location: ../acceder.php');
 }
 ?>
